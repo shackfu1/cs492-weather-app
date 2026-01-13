@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Forecast {
-  // TODO: Update with more relevant stuff
-
   int temperature;
   String windSpeed;
   String windDirection;
@@ -23,7 +21,6 @@ class Forecast {
   });
 }
 
-// TODO create this function
 Future<List<Forecast>> getForecastsByLocation(double lat, double long) async {
   String forecastUrl = "https://api.weather.gov/points/$lat,$long";
   http.Response forecastResponse = await http.get(Uri.parse(forecastUrl));
