@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:weatherapp/providers/location_provider.dart';
+import 'package:provider/provider.dart';
 
 class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WeatherAppBar({
     super.key,
     required this.title,
-    required this.locationProvider,
+    //required this.locationProvider,
     required TabController tabController,
   }) : _tabController = tabController;
 
   final String title;
-  final LocationProvider locationProvider;
+  //final LocationProvider locationProvider;
   final TabController _tabController;
+  //final locationProvider = context.watch<LocationProvider>();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + kTextTabBarHeight);
 
   @override
   Widget build(BuildContext context) {
+    final locationProvider = context.watch<LocationProvider>();
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       title: Text(title),

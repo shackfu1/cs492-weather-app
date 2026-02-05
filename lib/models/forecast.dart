@@ -80,46 +80,22 @@ String getAssetFromDescription(String description, bool isDaytime){
     }
   }
   if (description.toLowerCase().contains("thunder")){
-    if (isDaytime) {
-      return "assets/icons/strong_thunderstorms.svg";
-    } else {
-      return "assets/icons/strong_thunderstorms.svg";
-    }
+    return "assets/icons/strong_thunderstorms.svg";
   }
   if (description.toLowerCase().contains("rain") || description.toLowerCase().contains("drizzle") || description.toLowerCase().contains("showers")) {
-    if (isDaytime) {
-      return "assets/icons/showers_rain.svg";
-    } else {
-      return "assets/icons/showers_rain.svg";
-    }
+    return "assets/icons/showers_rain.svg";
   }
   if (description.toLowerCase().contains("dust")) {
-    if (isDaytime) {
-      return "assets/icons/haze_fog_dust_smoke.svg";
-    } else {
-      return "assets/icons/haze_fog_dust_smoke.svg";
-    }
+    return "assets/icons/haze_fog_dust_smoke.svg";
   }
   if (description.toLowerCase().contains("smoke")) {
-    if (isDaytime) {
-      return "assets/icons/haze_fog_dust_smoke.svg";
-    } else {
-      return "assets/icons/haze_fog_dust_smoke.svg";
-    }
+    return "assets/icons/haze_fog_dust_smoke.svg";
   }
   if (description.toLowerCase().contains("fog")) {
-    if (isDaytime) {
-      return "assets/icons/haze_fog_dust_smoke.svg";
-    } else {
-      return "assets/icons/haze_fog_dust_smoke.svg";
-    }
+    return "assets/icons/haze_fog_dust_smoke.svg";
   }
   if (description.toLowerCase().contains("sleet")) {
-    if (isDaytime) {
-      return "assets/icons/mixed_rain_hail_sleet.svg";
-    } else {
-      return "assets/icons/mixed_rain_hail_sleet.svg";
-    }
+    return "assets/icons/mixed_rain_hail_sleet.svg";
   }
 
   return "assets/icons/tornado.svg";

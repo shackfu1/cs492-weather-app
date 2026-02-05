@@ -3,6 +3,11 @@
 - Try to come up with as many as possible
 - Try to complete as many as possible
 
+- separate folders for widgets
+- add a variable for website title
+- remove pointless if statements in forecast model
+- create locationprovider in weather_app_dart rather than passing it in
+
 # Mobile App Development Class: Assignment Setup
 
 Welcome to the mobile app development class! This repository will hold the weather app which we will be working on each class. 

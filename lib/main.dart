@@ -17,13 +17,14 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    const title = 'CS492';
     return MaterialApp(
-      title: 'CS492',
+      title: '${title}',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'CS492'),
+      home: const MyHomePage(title: '${title}'),
     );
   }
 }
@@ -70,10 +71,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final locationProvider = context.watch<LocationProvider>();
 
     return Scaffold(
-      appBar: WeatherAppBar(title: widget.title, locationProvider: locationProvider, tabController: _tabController),
+      appBar: WeatherAppBar(title: widget.title, tabController: _tabController),
       body: WeatherAppBody(tabController: _tabController),
     );
   }
