@@ -21,8 +21,6 @@ class LocationButtons extends StatelessWidget {
             callbackFunction: setLocation, description: "Set Location"),
         LocationButton(
             callbackFunction: setLocationFromGps, description: "GPS"),
-        LocationButton(
-            callbackFunction: clearLocation, description: "Clear Location"),
       ],
     );
   }

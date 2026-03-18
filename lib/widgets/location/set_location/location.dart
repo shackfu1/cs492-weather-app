@@ -14,7 +14,7 @@ class LocationWidget extends StatefulWidget {
 
 class _LocationWidgetState extends State<LocationWidget> {
   final TextEditingController _locationController = TextEditingController();
-  bool _showError = false;
+  String _errorText = "";
 
   late LocationProvider _locationActions;
 
@@ -24,7 +24,7 @@ class _LocationWidgetState extends State<LocationWidget> {
     _locationController.addListener(() {
       if (_locationController.text.isNotEmpty) {
         setState(() {
-          _showError = false;
+          _errorText = "";
         });
       }
     });
@@ -39,10 +39,17 @@ class _LocationWidgetState extends State<LocationWidget> {
   void _setLocation() {
     if (_locationController.text.isEmpty) {
       setState(() {
-        _showError = true;
+        _errorText = "Error: Must Type Location";
       });
     } else {
-      _locationActions.setLocationFromString(_locationController.text);
+      Future<bool> result = _locationActions.setLocationFromString(_locationController.text);
+      result.then((success) {
+        if (!success) {
+          setState(() {
+            _errorText = "Error: Invalid Location";
+          });
+        }
+      });
     }
   }
 
@@ -54,6 +61,7 @@ class _LocationWidgetState extends State<LocationWidget> {
   @override
   Widget build(BuildContext context) {
     final locationProvider = context.watch<LocationProvider>();
+    debugPrint("error: $_errorText");
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
@@ -63,7 +71,7 @@ class _LocationWidgetState extends State<LocationWidget> {
             controller: _locationController,
             decoration: InputDecoration(
               labelText: "Enter Location",
-              errorText: _showError ? "Error: Must Type Location" : null,
+              errorText: _errorText.isEmpty ? null : _errorText,
             ),
           ),
           LocationButtons(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weatherapp/widgets/forecast/forecast.dart';
 import 'package:weatherapp/widgets/location/set_location/location.dart';
+import 'package:weatherapp/providers/theme_provider.dart';
+
 
 class WeatherAppBody extends StatelessWidget {
   const WeatherAppBody({
@@ -12,15 +15,20 @@ class WeatherAppBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.infinity,
-      width: 500,
-      child: TabBarView(
+    final themeProvider = context.watch<ThemeProvider>();
+    return Scaffold(
+      body: TabBarView(
         controller: _tabController,
         children: [
           ForecastWidget(),
           LocationWidget(),
         ],
+      ),
+      floatingActionButton:  Semantics(
+        label: "Dark Mode Switch",
+        child: Switch(
+            value: themeProvider.darkMode,
+            onChanged: (value) => {themeProvider.setDarkMode(value)}),
       ),
     );
   }

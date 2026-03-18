@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weatherapp/providers/location_provider.dart';
-import 'package:weatherapp/providers/theme_provider.dart';
 
 class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
   const WeatherAppBar({
@@ -20,18 +19,11 @@ class WeatherAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final locationProvider = context.watch<LocationProvider>();
-    final themeProvider = context.watch<ThemeProvider>();
 
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       title: Text(title),
       actions: [
-        Semantics(
-          label: "Dark Mode Switch",
-          child: Switch(
-              value: themeProvider.darkMode,
-              onChanged: (value) => {themeProvider.setDarkMode(value)}),
-        ),
         if (locationProvider.location != null)
           Padding(
             padding: const EdgeInsets.only(right: 16.0),

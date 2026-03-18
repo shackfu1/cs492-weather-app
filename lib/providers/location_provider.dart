@@ -61,7 +61,7 @@ class LocationProvider extends ChangeNotifier {
     saveZipToPrefs();
   }
 
-  void setLocationFromString(String? locationString) async {
+  Future<bool> setLocationFromString(String? locationString) async {
     if (locationString != null && locationString.trim().isNotEmpty) {
       location = await getLocationFromString(locationString);
     } else {
@@ -70,8 +70,11 @@ class LocationProvider extends ChangeNotifier {
 
     if (location != null) {
       storeSavedLocation(location!);
+    } else {
+      return false;
     }
     saveZipToPrefs();
+    return true;
   }
 
   void setLocation(Location loc) {
