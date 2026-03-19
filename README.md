@@ -2,6 +2,11 @@
 
 This app is designed to allow the user to select any location, either by inputting it manually or using their phone's GPS. The user can then swap to the forecast screen to view the weather forecast at that location, as well as the time in that timezone. The app will show a list of forecasts for each specific day, and then a detailed forecast if the user selects a certain day, displaying a detailed description and accompanying background image. Any locations the user adds is saved to a database, so they can easily switch between them at will. The user can also delete any saved locations if they so chose. The app also has a toggleable dark mode.
 
+## Demonstration Video
+
+The following is a video demonstration of the app in use and an explanation of the codebase:
+[https://youtu.be/Oplk2sqE9T4](https://youtu.be/Oplk2sqE9T4)
+
 ## Step 1: Open Flutter
 
 This app uses Flutter, so you must have Flutter installed to run it. You also need an IDE to use Flutter - if you don't already have one, you can use VSCode. You will also need to install Git. The following link has easy-to-follow instructions for setting up VSCode, Github, and Flutter:
