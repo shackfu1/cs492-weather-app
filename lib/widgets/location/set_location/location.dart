@@ -42,7 +42,8 @@ class _LocationWidgetState extends State<LocationWidget> {
         _errorText = "Error: Must Type Location";
       });
     } else {
-      Future<bool> result = _locationActions.setLocationFromString(_locationController.text);
+      Future<bool> result =
+          _locationActions.setLocationFromString(_locationController.text);
       result.then((success) {
         if (!success) {
           setState(() {
@@ -53,11 +54,6 @@ class _LocationWidgetState extends State<LocationWidget> {
     }
   }
 
-  void _clearLocation() {
-    _locationActions.setLocationFromString(null);
-    _locationController.text = "";
-  }
-
   @override
   Widget build(BuildContext context) {
     final locationProvider = context.watch<LocationProvider>();
@@ -65,31 +61,73 @@ class _LocationWidgetState extends State<LocationWidget> {
 
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: Column(
-        children: [
-          TextField(
-            controller: _locationController,
-            decoration: InputDecoration(
-              labelText: "Enter Location",
-              errorText: _errorText.isEmpty ? null : _errorText,
+      child: Builder(builder: (context) {
+        final mq = MediaQuery.of(context);
+        final effectiveHeight = mq.size.height - mq.viewInsets.bottom;
+        final isLandscape = mq.size.width > effectiveHeight;
+        final inputColumn = Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(
+              controller: _locationController,
+              decoration: InputDecoration(
+                labelText: "Enter Location",
+                errorText: _errorText.isEmpty ? null : _errorText,
+              ),
             ),
-          ),
-          LocationButtons(
-            setLocation: _setLocation,
-            setLocationFromGps: _locationActions.setLocationFromGps,
-            clearLocation: _clearLocation,
-          ),
-          Text(
-            locationProvider.location != null
-                ? "${locationProvider.location?.city}, ${locationProvider.location?.state} ${locationProvider.location?.zip}"
-                : "No Location...",
-          ),
-          SizedBox(
-              height: 500,
-              width: 500,
-              child: SavedLocations())
-        ],
-      ),
+            const SizedBox(height: 12),
+            LocationButtons(
+              setLocation: _setLocation,
+              setLocationFromGps: _locationActions.setLocationFromGps,
+            ),
+            const SizedBox(height: 12),
+            Center(
+              child: Text(
+                locationProvider.location != null
+                    ? "${locationProvider.location?.city}, ${locationProvider.location?.state} ${locationProvider.location?.zip}"
+                    : "No Location...",
+              ),
+            ),
+          ],
+        );
+
+        if (!isLandscape) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                inputColumn,
+                const SizedBox(height: 12),
+                SizedBox(
+                    height: 500,
+                    width: double.infinity,
+                    child: SavedLocations()),
+              ],
+            ),
+          );
+        } else {
+          return Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: inputColumn,
+                  ),
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: SizedBox(
+                      height: double.infinity, child: SavedLocations()),
+                ),
+              ),
+            ],
+          );
+        }
+      }),
     );
   }
 }

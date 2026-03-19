@@ -5,12 +5,10 @@ class LocationButtons extends StatelessWidget {
   const LocationButtons(
       {super.key,
       required this.setLocation,
-      required this.setLocationFromGps,
-      required this.clearLocation});
+      required this.setLocationFromGps});
 
   final void Function() setLocation;
   final void Function() setLocationFromGps;
-  final void Function() clearLocation;
 
   @override
   Widget build(BuildContext context) {

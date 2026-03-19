@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:weatherapp/models/locations/location.dart';
+import 'package:weatherapp/models/locations/location_model.dart';
 
 import 'package:path_provider/path_provider.dart';
 

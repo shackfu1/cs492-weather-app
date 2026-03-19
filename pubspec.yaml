@@ -37,6 +37,7 @@ dependencies:
   http: ^1.6.0
   geocoding: ^4.0.0
   geolocator: ^14.0.2
+  worldtime: ^1.4.2
   provider: ^6.1.5+1
   flutter_svg: ^2.2.3
   path_provider: ^2.1.5
@@ -67,6 +68,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/backgrounds/
     - assets/sql/
     - .env
   # To add assets to your application, add an assets section, like this:

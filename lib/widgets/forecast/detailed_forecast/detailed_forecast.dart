@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weatherapp/models/forecast.dart';
-import 'package:weatherapp/models/pexels_image.dart';
 import 'package:weatherapp/providers/forecast_provider.dart';
 import 'package:weatherapp/providers/theme_provider.dart';
 import 'package:weatherapp/widgets/forecast/detailed_forecast/detailed_forecast_text.dart';
@@ -14,35 +12,6 @@ class DetailedForecast extends StatefulWidget {
 }
 
 class _DetailedForecastState extends State<DetailedForecast> {
-  String? _imageUrl;
-  Forecast? _lastForecast;
-  PexelsImage pexelsImage = PexelsImage();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final activeForecast = context.watch<ForecastProvider>().activeForecast;
-
-    if (activeForecast != null && activeForecast != _lastForecast) {
-      _lastForecast = activeForecast;
-      _fetchAndUpdateImage(activeForecast);
-    }
-  }
-
-  Future<void> _fetchAndUpdateImage(Forecast forecast) async {
-    String day = forecast.isDaytime ? "Day" : "Night";
-
-    String prompt = "$day ${forecast.shortForecast}".trim();
-
-    final imageUrl = await pexelsImage.getImage(prompt);
-
-    if (!mounted) return;
-
-    setState(() {
-      _imageUrl = imageUrl;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +44,12 @@ class _DetailedForecastState extends State<DetailedForecast> {
           child: Stack(
             children: [
               // Background image
-              if (_imageUrl != null)
-                Positioned.fill(
-                  child: Image.network(
-                    _imageUrl!,
-                    fit: BoxFit.cover,
-                  ),
+              Positioned.fill(
+                child: Image(
+                  image: AssetImage('assets/backgrounds/${activeForecast.imagePath}.png'),
+                  fit: BoxFit.cover,
                 ),
+              ),
       
               Positioned.fill(
                 child: Container(
@@ -89,10 +57,6 @@ class _DetailedForecastState extends State<DetailedForecast> {
                 ),
               ),
               DetailedForecastText(activeForecast: activeForecast),
-              if (_imageUrl == null)
-                const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                ),
             ],
           ),
         ),
